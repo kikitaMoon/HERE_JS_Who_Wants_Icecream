@@ -1,5 +1,21 @@
+.box {
+  position: relative;
+}
+.info {
+  left:10px;
+  top:10px;
+  position: absolute;
+  width: 20vw;
+  height: 12vh;
+  font-size: 20px;
+  line-height: 24px;
+  text-indent: 1em;
+
+  background-color:rgba(235, 74, 149, 0.623);
+}
 .map {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-  }
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
