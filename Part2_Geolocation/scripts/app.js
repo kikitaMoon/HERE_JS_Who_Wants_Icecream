@@ -19,8 +19,7 @@ var coordinates = {
   lng: 13.384944
 };
 var mapOptions = {
-  center: coordinates,
-  zoom: 14
+  zoom: 10
 }
 var map = new H.Map(
   mapContainer,
@@ -38,29 +37,6 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 window.addEventListener('resize', function () {
   map.getViewPort().resize();
 });
-
-
-// // -----------------------------------------------------------------------
-// // Adding Markers to the Map
-// var marker = new H.map.Marker(coordinates);
-
-// // Custom Icons for Markers
-// var iconUrl = './images/icecream.svg';
-
-// var iconOptions = {
-// 	// The icon's size in pixel:
-//   size: new H.math.Size(26, 34),
-// 	// The anchorage point in pixel, 
-// 	// defaults to bottom-center
-//   anchor: new H.math.Point(14, 34)
-// };
-
-// var markerOptions = {
-//    icon: new H.map.Icon(iconUrl, iconOptions)
-// };
-
-// var marker = new H.map.Marker(coordinates, markerOptions);
-//  map.addObject(marker);
 
 
 /// ===============================================================
@@ -88,6 +64,7 @@ function error(err) {
 }
 // Action
 navigator.geolocation.getCurrentPosition(success, error, options);
+
 
 // --------------------------------------------------------------------
 // WatchPosition call every time the position of the device changes
