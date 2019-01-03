@@ -39,6 +39,7 @@ window.addEventListener('resize', function () {
 });
 
 
+
 /// ===============================================================
 /// Part 2 update
 
@@ -85,6 +86,7 @@ function updatePosition (event) {
   map.addObject(marker);
   map.setCenter(coordinates);
 }
+
 // Action
 navigator.geolocation.watchPosition(updatePosition);
 
