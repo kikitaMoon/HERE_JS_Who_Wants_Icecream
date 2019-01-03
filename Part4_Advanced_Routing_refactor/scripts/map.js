@@ -32,6 +32,11 @@ HEREMap.prototype.updateMyPosition = function (event) {
 
     this.myLocationMarker = this.addMarker(this.position);
     this.map.setCenter(this.position);
+
+    // Drawing Route
+    if (!this.route) {
+        this.drawRoute(this.position, endCoordinates);
+    }
 };
 
 // Add a new marker at the provided coordinate
@@ -52,21 +57,15 @@ HEREMap.prototype.resizeToFit = function () {
     this.map.getViewPort().resize();
 };
 
-// Drawing Route
-if (!this.route) {
-    this.drawRoute(this.position, endCoordinates);
-  }
 
 HEREMap.prototype.drawRoute = function (fromCoordinates, toCoordinates) {
     var routeOptions = {
         mode: 'fastest;car',
         representation: 'display',
-        waypoint0: locationToWaypointString(fromCoordinates),
-        waypoint1: locationToWaypointString(toCoordinates)
+        waypoint0: Utils.locationToWaypointString(fromCoordinates),
+        waypoint1: Utils.locationToWaypointString(toCoordinates)
     };
 
     this.routes = new HERERoute(this.map, this.platform, routeOptions);
+
 };
-
-
-
