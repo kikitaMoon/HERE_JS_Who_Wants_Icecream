@@ -62,6 +62,11 @@ HEREMap.prototype.drawRoute = function (fromCoordinates, toCoordinates) {
     var routeOptions = {
         mode: 'fastest;car',
         representation: 'display',
+        // Part4 SS2 modified
+        // By passing an integer via the alternatives key 
+        // when requesting routing information from the API 
+        // we will be provided additional options.
+        alternatives: 2,
         waypoint0: Utils.locationToWaypointString(fromCoordinates),
         waypoint1: Utils.locationToWaypointString(toCoordinates)
     };

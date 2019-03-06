@@ -6,46 +6,52 @@ function HERERoute(map, platform, routeOptions) {
 
 
     var onSuccess = function (result) {
-        // Option_1 Simply put the response to the console log
-        console.log('Route found!', result);
 
-        // Option_2 Furtherly draw the response to the map
-        var route,
-            routeShape,
-            startPoint,
-            endPoint,
-            //strip;
-            lineString;
-
+        // Part4 SS2 modified
+        // Simplify on success function
         if (result.response.route) {
-
-            // Just take the first Route in the array
-            route = result.response.route[0];
-            routeShape = route.shape;
-            // H.geo.Strip has been deprecated since 3.0.15.0
-            lineString = new H.geo.LineString();
-            routeShape.forEach(function (point) {
-                var parts = point.split(',');
-                lineString.pushLatLngAlt(parts[0], parts[1]);
+            var routes = result.response.route;
+            // Setting view bounds
+            // routes.forEach(drawRoute);
+            // add all routes to a group
+            var routeLines = routes.map(drawRoute);
+            var routeLineGroup = new H.map.Group({
+                objects: routeLines
             });
-
-            // Utilize H.map.Polyline to draw a blue line
-            var routeLine = new H.map.Polyline(lineString, {
-                style: {
-                    strokeColor: 'blue',
-                    lineWidth: 10
-                }
-            });
-            map.addObject(routeLine);
-
-            // update the map bounds to that of our route
-            map.setViewBounds(routeLine.getBounds());
+            map.addObject(routeLineGroup);
+            map.setViewBounds(routeLineGroup.getBounds());
         }
     };
+
 
     var onError = function (error) {
         console.error('Oh no! There was some communication error!', error);
     }
+
+    // Part4 SS2 modified
+    // Add drawRoute Function 
+    var drawRoute = function (route) {
+        var routeShape = route.shape;
+        var LineString = new H.geo.LineString();
+
+        routeShape.forEach(function (point) {
+            var parts = point.split(',');
+            LineString.pushLatLngAlt(parts[0], parts[1]);
+        });
+
+        var routeLine = new H.map.Polyline(LineString, {
+            style: {
+                strokeColor: 'blue',
+                lineWidth: 3
+            }
+        });
+
+        // Setting view bounds using Group bounds not the last route
+        // map.addObject(routeLine);
+        // map.setViewBounds(routeLine.getBounds());
+        return routeLine;
+    };
+
 
     router.calculateRoute(routeOptions, onSuccess, onError);
 }
