@@ -56,14 +56,14 @@ HEREMap.prototype.addMarker = function (coordinates, icon) {
     origin: {
       url: './images/origin.png',
       options: {
-        size: new H.math.Size(32, 32),
+        size: new H.math.Size(64, 64),
         anchor: new H.math.Point(12, 36)
       }
     },
     destination: {
       url: './images/destination.png',
       options: {
-        size: new H.math.Size(32, 32),
+        size: new H.math.Size(64, 64),
         anchor: new H.math.Point(12, 36)
       }
     }
