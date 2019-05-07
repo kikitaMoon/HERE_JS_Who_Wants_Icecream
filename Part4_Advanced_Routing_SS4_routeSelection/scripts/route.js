@@ -29,6 +29,7 @@ function HERERoute (map, platform, routeOptions) {
       map.addObject(routeLineGroup)
       map.setViewBounds(routeLineGroup.getBounds())
 
+      // pass the first route as argument for temperary testing
       onRouteSelection(routes[0])
     }
   }
@@ -36,7 +37,6 @@ function HERERoute (map, platform, routeOptions) {
   var onError = function (error) {
     console.error('Oh no! There was some communication error!', error)
   }
-
 
   // Add drawRoute Function 
   var drawRoute = function (route) {
@@ -58,9 +58,9 @@ function HERERoute (map, platform, routeOptions) {
     console.log('A route has been selected.', route)
     selectedRoute = route
     if (selectedRoute) {
-      selectedRoute.routeLine.setStyle(routeLineStyles.normal)
+      selectedRoute.routeLine.setStyle(routeLineStyles.normal).setZIndex(1)
     }
-    route.routeLine.setStyle(routeLineStyles.selected)
+    route.routeLine.setStyle(routeLineStyles.selected).setZIndex(10)
     selectedRoute = route
   }
 
