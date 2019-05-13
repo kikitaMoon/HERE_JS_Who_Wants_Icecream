@@ -12,6 +12,7 @@ function HERERoute (map, platform, routeOptions) {
 
   var selectedRoute
 
+
   var onSuccess = function (result) {
     if (result.response.route) {
       var routeLineGroup = new H.map.Group()
@@ -36,7 +37,6 @@ function HERERoute (map, platform, routeOptions) {
       this.routePanel = new HERERoutesPanel(routes,
         { onRouteSelection: onRouteSelection }
 
-
       )
     }
   }
@@ -45,16 +45,21 @@ function HERERoute (map, platform, routeOptions) {
     console.error('Oh no! There was some communication error!', error)
   }
 
+
   // Add drawRoute Function 
   var drawRoute = function (route) {
     var routeShape = route.shape
+
+     // Create a LineString to use as a point source for the route line
     var LineString = new H.geo.LineString()
 
+    // Push all the points in the shape into the strip:
     routeShape.forEach(function (point) {
       var parts = point.split(',')
       LineString.pushLatLngAlt(parts[0], parts[1])
     })
 
+    // Create a polyline to display the route:
     var routeLine = new H.map.Polyline(LineString, {
     style: routeLineStyles.normal })
     return routeLine
@@ -63,7 +68,7 @@ function HERERoute (map, platform, routeOptions) {
   // defining a callback to be triggered every time a route is selected
   var onRouteSelection = function (route) {
     console.log('A route has been selected.', route)
-    selectedRoute = route
+    // selectedRoute = route
     if (selectedRoute) {
       selectedRoute.routeLine.setStyle(routeLineStyles.normal).setZIndex(1)
     }
