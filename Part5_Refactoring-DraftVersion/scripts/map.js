@@ -28,6 +28,8 @@ function HEREMap (mapContainer, platform, mapOptions) {
   window.addEventListener('resize', this.resizeToFit.bind(this))
 }
 
+
+
 // Centre the map and render the user position
 HEREMap.prototype.updateMyPosition = function (event) {
   this.position = {
@@ -104,10 +106,6 @@ HEREMap.prototype.updateMarker = function (markerName, coordinates) {
   this.markers[markerName] = this.addMarker(coordinates, markerName)
 }
 
-
-
-
-
 HEREMap.prototype.drawRoute = function (fromCoordinates, toCoordinates) {
   var routeOptions = {
     mode: 'fastest;car',
@@ -121,11 +119,9 @@ HEREMap.prototype.drawRoute = function (fromCoordinates, toCoordinates) {
   this.addMarker(fromCoordinates, 'origin')
   this.addMarker(toCoordinates, 'destination')
 
-  // this.routes = new HERERoute(this.map, this.platform, routeOptions)
-  this.router.drawRoute(routeOptions)
+  this.routes = new HERERouter(this.map, this.platform, routeOptions)
+  //this.router.drawRoutes(routeOptions)
 }
-
-
 
 // Update map centre and size if the browser window is resized.
 HEREMap.prototype.resizeToFit = function () {
